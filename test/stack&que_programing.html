@@ -1,0 +1,45 @@
+<script>
+function solution(progresses, speeds) {
+    var answer = [];
+    var day = 0;
+	var complte_jop = 0;
+    while(progresses.length > 0){
+        for(let i in progresses){
+            progresses[i] = progresses[i] + speeds[i];
+        }
+		
+		for(let i in progresses){
+			if(i == 0){
+				if(progresses[i] >= 100){
+					complte_jop++;
+				}else{
+					break;
+				}
+			}else{
+				if(progresses[i-1] >= 100 && progresses[i] >= 100){
+					complte_jop++;
+				}else if(progresses[i] < 100){
+					break;
+				}
+			}
+		};
+		
+		progresses.splice(0, complte_jop); 
+		speeds.splice(0, complte_jop); 
+		
+		if(complte_jop > 0){
+			answer.push(complte_jop);
+		}
+		
+        day++;
+		complte_jop = 0;
+    }
+    
+    return answer;
+}
+
+var progresses = [93, 30, 55, 60, 40, 65];
+var speeds = [1, 30, 5, 10, 60, 7];
+console.log(solution(progresses, speeds))
+
+</script>
